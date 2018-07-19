@@ -11,6 +11,15 @@ function btnState () {
   $('.save-btn').prop('disabled', checkInputs);
 }
 
+function cardObject() {
+    return {
+        id: Date.now(),
+        title: $('#title-input').val(),
+        body: $('#body-input').val(),
+        quality: "swill"
+    };
+}
+
 function checkInputs () {
   if ($('#title-input').val() === "" || $('#body-input').val() === "") {
      return true;
@@ -56,19 +65,13 @@ function newCard () {
 };
 
 function localStoreCard () {
-  var cardString = JSON.stringify
+  var cardString = JSON.stringify(cardObject());
+  localStorage.setItem(Date.now(), cardString);
 }
 
-function cardObject() {
-    return {
-        id: Date.now(),
-        title: $('#title-input').val(),
-        body: $('#body-input').val(),
-        quality: "swill"
-    };
-}
 
-var localStoreCard = function() {
-    var cardString = JSON.stringify(cardObject());
-    localStorage.setItem('card' + numCards  , cardString);
-}
+
+// var localStoreCard = function() {
+//     var cardString = JSON.stringify(cardObject());
+//     localStorage.setItem('card' + numCards  , cardString);
+// }
