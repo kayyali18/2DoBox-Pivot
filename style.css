@@ -67,6 +67,10 @@ h1{
     background-color: #045e55;
 }
 
+.save-btn:disabled {
+  background-color: #bfe3df;
+}
+
 input {
     align-items: center;
     display: flex;
@@ -97,7 +101,7 @@ input {
 }
 
 h2 {
-   color: #6d6e71; 
+   color: #6d6e71;
    display: inline-block;
    font-family: 'Roboto Slab', serif;
    font-size: 150%;
@@ -123,7 +127,7 @@ button {
     background-image: url(./images/upvote.svg);
     background-size: cover;
     height: 20px;
-    margin-right: 5px; 
+    margin-right: 5px;
     width: 20px;
 }
 
@@ -139,7 +143,7 @@ button {
     background-image: url(./images/downvote.svg);
     background-size: cover;
     height: 20px;
-    margin-right: 5px; 
+    margin-right: 5px;
     width: 20px;
 }
 
@@ -177,4 +181,3 @@ button {
         border: solid #999 1px;
     }
 }
-
