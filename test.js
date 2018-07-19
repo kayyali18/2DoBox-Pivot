@@ -32,26 +32,43 @@ function saveBtn (event) {
   var titleInput = ($('#title-input').val());
   var bodyInput = ($('#body-input').val());
   newCard()
+  localStoreCard();
 
 }
 
 
 
 function newCard () {
-    let id = 1;
-    let title = 'hi';
-    let body = 'hello';
-    let quality = 'swill';
+    var idea = cardObject();
+    console.log(idea);
     var html =
-      `<div id="${id}"class="card-container">
-        <h2 class="title-of-card">${title}</h2>
+      `<div id="${idea.id}"class="card-container">
+        <h2 class="title-of-card">${idea.title}</h2>
         <button class="delete-button"></button>
-        <p class="body-of-card">${body}</p>
+        <p class="body-of-card">${idea.body}</p>
         <button class="upvote"></button>
         <button class="downvote"></button>
-        <p class="quality">quality: <span class="qualityVariable">${quality}</span></p>
+        <p class="quality">quality: <span class="qualityVariable">${idea.quality}</span></p>
         <hr>
       </div>`
     $('.bottom-box').prepend(html);
 
 };
+
+function localStoreCard () {
+  var cardString = JSON.stringify
+}
+
+function cardObject() {
+    return {
+        id: Date.now(),
+        title: $('#title-input').val(),
+        body: $('#body-input').val(),
+        quality: "swill"
+    };
+}
+
+var localStoreCard = function() {
+    var cardString = JSON.stringify(cardObject());
+    localStorage.setItem('card' + numCards  , cardString);
+}
