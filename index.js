@@ -1,4 +1,4 @@
-var title = $('#title-input').val();
+ var title = $('#title-input').val();
 var body = $('#body-input').val();
 var numCards = 0;
 var qualityVariable = "swill";
