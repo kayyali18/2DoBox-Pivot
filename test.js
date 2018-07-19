@@ -42,7 +42,7 @@ function newCard () {
     let title = 'hi';
     let body = 'hello';
     let quality = 'swill';
-    var html =  $([
+    var html =
       `<div id="${id}"class="card-container">
         <h2 class="title-of-card">${title}</h2>
         <button class="delete-button"></button>
@@ -52,7 +52,6 @@ function newCard () {
         <p class="quality">quality: <span class="qualityVariable">${quality}</span></p>
         <hr>
       </div>`
-    ]);
     $('.bottom-box').prepend(html);
 
 };
