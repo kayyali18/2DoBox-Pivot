@@ -36,7 +36,6 @@ function deleteBtn () {
     // console.log($(this).parent().data.id);
     console.log(this.parentNode.dataset.id);
     var id = this.parentNode.dataset.id;
-    localStorage.removeItem(id);
   })
   // if (event.target.className === "delete-button") {
   //       var cardHTML = $(event.target).closest('.card-container').remove();

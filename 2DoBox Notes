@@ -2,7 +2,6 @@
 
 Initial notes - 
 
-Delete buttons - 
 Search - not working, no code
 Quality Buttons - bugged, only first idea
 Editable - not working, no code
@@ -13,3 +12,4 @@ Save button - e.preventDefault not working, make numCards count what's in local 
 Pageload - needs refactoring, grabs stored info, bugged
 New Card - fix using template literals(ES6 syntax)
 Storage - refactor card object function, localStorage function
+Delete buttons - 
