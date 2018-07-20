@@ -1,11 +1,11 @@
- var title = $('#title-input').val();
+var title = $('#title-input').val();
 var body = $('#body-input').val();
-var numCards = 0; //  make it dynamic
 
 $.each(localStorage, function(key) {
     console.log (JSON.parse(this));
+    // console.log (JSON.parse(this))
     var cardData = JSON.parse(this);
-    numCards++;
+
     $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
 });
 

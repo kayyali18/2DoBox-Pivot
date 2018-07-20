@@ -2,15 +2,10 @@
 $('#title-input').on('keyup', btnState);
 $('#body-input').on('keyup', btnState);
 $('.save-btn').on('click', saveBtn);
-$.each(localStorage, function(key) {
-    debugger;
-    parseInt((JSON.parse(key)));
-    var cardData = JSON.parse(key);
-    console.log(cardData)
-    $( ".bottom-box" ).prepend(newCard(cardData));
-});
-
 onLoad();
+
+
+
 
 
 function btnState () {
@@ -34,9 +29,22 @@ function checkInputs () {
   }
 }
 
+function getData() {
+  $.each(localStorage, function(key) {
+    var object = parseInt(key);
+    var parsedObject = JSON.parse(localStorage.getItem(object))
+    if (!parsedObject) {
+      return false;
+    }
+    console.log(parsedObject);
+    newCard(parsedObject);
+  });
+}
+
 //function for window load
 function onLoad() {
   btnState();
+  getData();
 }
 
 
