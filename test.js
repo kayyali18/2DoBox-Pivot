@@ -2,6 +2,7 @@
 $('#title-input').on('keyup', btnState);
 $('#body-input').on('keyup', btnState);
 $('.save-btn').on('click', saveBtn);
+$('.bottom-box').on('mouseover', masterFunction);
 onLoad();
 
 
@@ -29,6 +30,20 @@ function checkInputs () {
   }
 }
 
+function deleteBtn () {
+  $('.delete-button').on('click', function() {
+    $(this).parent().hide(200);
+    // console.log($(this).parent().data.id);
+    console.log(this.parentNode.dataset.id);
+    var id = this.parentNode.dataset.id;
+    localStorage.removeItem(id);
+  })
+  // if (event.target.className === "delete-button") {
+  //       var cardHTML = $(event.target).closest('.card-container').remove();
+  //       var cardHTMLId = cardHTML[0].id;
+  //       localStorage.removeItem(cardHTMLId);
+}
+
 function getData() {
   $.each(localStorage, function(key) {
     var object = parseInt(key);
@@ -39,6 +54,10 @@ function getData() {
     console.log(parsedObject);
     newCard(parsedObject);
   });
+}
+
+function masterFunction() {
+  deleteBtn();
 }
 
 //function for window load
@@ -63,7 +82,7 @@ function saveBtn (event) {
 
 function newCard (key) {
     var html =
-      `<div id="${key.id}"class="card-container">
+      `<div data-id="${key.id}" class="card-container">
         <h2 class="title-of-card">${key.title}</h2>
         <button class="delete-button"></button>
         <p class="body-of-card">${key.body}</p>

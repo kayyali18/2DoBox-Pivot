@@ -2,11 +2,14 @@
 
 Initial notes - 
 
-Save button - e.preventDefault not working, make numCards count what's in local storage 
+Delete buttons - 
 Search - not working, no code
 Quality Buttons - bugged, only first idea
 Editable - not working, no code
-Pageload - needs refactoring, grabs stored info, bugged
-Storage - refactor card object function, localStorage function
-New Card - fix using template literals(ES6 syntax)
 Bottom Box - change to a master function, separate conditionals into individual functions
+
+FINISHED - 
+Save button - e.preventDefault not working, make numCards count what's in local storage 
+Pageload - needs refactoring, grabs stored info, bugged
+New Card - fix using template literals(ES6 syntax)
+Storage - refactor card object function, localStorage function
