@@ -1,4 +1,4 @@
-
+var $this = $(this);
 $('#title-input').on('keyup', btnState);
 $('#body-input').on('keyup', btnState);
 $('.save-btn').on('click', saveBtn);
@@ -13,7 +13,8 @@ function cardObject() {
     return {
         title: $('#title-input').val(),
         body: $('#body-input').val(),
-        quality: "swill"
+        quality: 0,
+        display: 'swill'
     };
 }
 
@@ -42,8 +43,8 @@ function getData() {
     if (!parsedObject) {
       return false;
     }
-    console.log(parsedObject);
     newCard(parsedObject, object);
+    fixQuality(object)
   });
 }
 
@@ -51,14 +52,10 @@ function masterFunction() {
   deleteBtn();
 }
 
-//function for window load
 function onLoad() {
   btnState();
   getData();
 }
-
-
-
 
 function saveBtn (event) {
   event.preventDefault();
@@ -67,13 +64,12 @@ function saveBtn (event) {
   var id = Date.now();
   newCard(cardObject(), id)
   localStoreCard(id);
-
+  fixQuality(id);
 }
 
 
 
 function newCard (key, id) {
-  console.log (id);
     var html =
       `<div data-id="${id}" class="card-container">
         <h2 class="title-of-card">${key.title}</h2>
@@ -81,7 +77,7 @@ function newCard (key, id) {
         <p class="body-of-card">${key.body}</p>
         <button class="upvote"></button>
         <button class="downvote"></button>
-        <p class="quality">quality: <span class="qualityVariable">${key.quality}</span></p>
+        <p class="quality">quality: <span class="qualityVariable">${key.display}</span></p>
         <hr>
       </div>`
     $('.bottom-box').prepend(html);
@@ -91,4 +87,49 @@ function newCard (key, id) {
 function localStoreCard (id) {
   var cardString = JSON.stringify(cardObject());
   localStorage.setItem(id, cardString);
+}
+
+
+$('.upvote').on('click', function (e) {
+  var objID = this.parentNode.dataset.id
+  var obj = JSON.parse(localStorage.getItem(objID));
+  if (obj.quality <= 1){
+    changeQuality (objID, obj, 1)
+    $(this).siblings('p').children('span').html(fixQuality(objID));
+  }
+
+
+})
+
+$('.downvote').on('click', function (e) {
+  var objID = this.parentNode.dataset.id
+  var obj = JSON.parse(localStorage.getItem(objID));
+  if (obj.quality >= 1){
+    changeQuality (objID, obj, -1)
+    $(this).siblings('p').children('span').html(fixQuality(objID));
+  }
+
+
+})
+
+function fixQuality (id) {
+  arr = ['swill', 'plausible', 'genius'];
+  if (id) {
+    var obj = JSON.parse(localStorage.getItem(id));
+    obj.display = arr[obj.quality];
+    var stringify = JSON.stringify(obj);
+    localStorage.setItem(id, stringify)
+    return obj.display;
+  }
+}
+
+function changeQuality (id, obj, num) {
+   {
+    console.log(obj.quality);
+    obj.quality += num;
+    console.log(obj.quality);
+    var stringify = JSON.stringify(obj);
+    localStorage.setItem(id, stringify)
+  }
+
 }
