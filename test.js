@@ -11,7 +11,6 @@ function btnState () {
 
 function cardObject() {
     return {
-        id: Date.now(),
         title: $('#title-input').val(),
         body: $('#body-input').val(),
         quality: "swill"
@@ -65,16 +64,18 @@ function saveBtn (event) {
   event.preventDefault();
   var titleInput = ($('#title-input').val());
   var bodyInput = ($('#body-input').val());
-  newCard(cardObject())
-  localStoreCard();
+  var id = Date.now();
+  newCard(cardObject(), id)
+  localStoreCard(id);
 
 }
 
 
 
-function newCard (key) {
+function newCard (key, id) {
+  console.log (id);
     var html =
-      `<div data-id="${key.id}" class="card-container">
+      `<div data-id="${id}" class="card-container">
         <h2 class="title-of-card">${key.title}</h2>
         <button class="delete-button"></button>
         <p class="body-of-card">${key.body}</p>
@@ -87,9 +88,9 @@ function newCard (key) {
 
 };
 
-function localStoreCard () {
+function localStoreCard (id) {
   var cardString = JSON.stringify(cardObject());
-  localStorage.setItem(Date.now(), cardString);
+  localStorage.setItem(id, cardString);
 }
 
 
