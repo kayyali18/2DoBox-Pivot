@@ -43,7 +43,7 @@ function getData() {
       return false;
     }
     console.log(parsedObject);
-    newCard(parsedObject);
+    newCard(parsedObject, object);
   });
 }
 
@@ -92,10 +92,3 @@ function localStoreCard (id) {
   var cardString = JSON.stringify(cardObject());
   localStorage.setItem(id, cardString);
 }
-
-
-
-// var localStoreCard = function() {
-//     var cardString = JSON.stringify(cardObject());
-//     localStorage.setItem('card' + numCards  , cardString);
-// }
