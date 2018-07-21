@@ -18,6 +18,12 @@ function cardObject() {
     };
 }
 
+function changeQuality (id, obj, num) {
+    obj.quality += num;
+    var stringify = JSON.stringify(obj);
+    localStorage.setItem(id, stringify)
+}
+
 function checkInputs () {
   if ($('#title-input').val() === "" || $('#body-input').val() === "") {
      return true;
@@ -36,6 +42,17 @@ function deleteBtn () {
   });
 }
 
+function fixQuality (id) {
+  arr = ['swill', 'plausible', 'genius'];
+  if (id) {
+    var obj = JSON.parse(localStorage.getItem(id));
+    obj.display = arr[obj.quality];
+    var stringify = JSON.stringify(obj);
+    localStorage.setItem(id, stringify)
+    return obj.display;
+  }
+}
+
 function getData() {
   $.each(localStorage, function(key) {
     var object = parseInt(key);
@@ -48,26 +65,14 @@ function getData() {
   });
 }
 
+function localStoreCard (id) {
+  var cardString = JSON.stringify(cardObject());
+  localStorage.setItem(id, cardString);
+}
+
 function masterFunction() {
   deleteBtn();
 }
-
-function onLoad() {
-  btnState();
-  getData();
-}
-
-function saveBtn (event) {
-  event.preventDefault();
-  var titleInput = ($('#title-input').val());
-  var bodyInput = ($('#body-input').val());
-  var id = Date.now();
-  newCard(cardObject(), id)
-  localStoreCard(id);
-  fixQuality(id);
-}
-
-
 
 function newCard (key, id) {
     var html =
@@ -84,52 +89,43 @@ function newCard (key, id) {
 
 };
 
-function localStoreCard (id) {
-  var cardString = JSON.stringify(cardObject());
-  localStorage.setItem(id, cardString);
+function onLoad() {
+  btnState();
+  getData();
+  voteUp();
+  voteDown();
 }
 
-
-$('.upvote').on('click', function (e) {
-  var objID = this.parentNode.dataset.id
-  var obj = JSON.parse(localStorage.getItem(objID));
-  if (obj.quality <= 1){
-    changeQuality (objID, obj, 1)
-    $(this).siblings('p').children('span').html(fixQuality(objID));
-  }
-
-
-})
-
-$('.downvote').on('click', function (e) {
-  var objID = this.parentNode.dataset.id
-  var obj = JSON.parse(localStorage.getItem(objID));
-  if (obj.quality >= 1){
-    changeQuality (objID, obj, -1)
-    $(this).siblings('p').children('span').html(fixQuality(objID));
-  }
-
-
-})
-
-function fixQuality (id) {
-  arr = ['swill', 'plausible', 'genius'];
-  if (id) {
-    var obj = JSON.parse(localStorage.getItem(id));
-    obj.display = arr[obj.quality];
-    var stringify = JSON.stringify(obj);
-    localStorage.setItem(id, stringify)
-    return obj.display;
-  }
+function saveBtn (event) {
+  event.preventDefault();
+  var titleInput = ($('#title-input').val());
+  var bodyInput = ($('#body-input').val());
+  var id = Date.now();
+  newCard(cardObject(), id)
+  localStoreCard(id);
+  fixQuality(id);
+  voteUp();
+  voteDown();
 }
 
-function changeQuality (id, obj, num) {
-   {
-    console.log(obj.quality);
-    obj.quality += num;
-    console.log(obj.quality);
-    var stringify = JSON.stringify(obj);
-    localStorage.setItem(id, stringify)
-  }
+function voteUp () {
+  $('.upvote').on('click', function (e) {
+    var objID = this.parentNode.dataset.id
+    var obj = JSON.parse(localStorage.getItem(objID));
+    if (obj.quality <= 1){
+      changeQuality (objID, obj, 1)
+      $(this).siblings('p').children('span').html(fixQuality(objID));
+    }
+  })
+}
 
+function voteDown () {
+  $('.downvote').on('click', function (e) {
+    var objID = this.parentNode.dataset.id
+    var obj = JSON.parse(localStorage.getItem(objID));
+    if (obj.quality >= 1){
+      changeQuality (objID, obj, -1)
+      $(this).siblings('p').children('span').html(fixQuality(objID));
+    }
+  })
 }
