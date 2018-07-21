@@ -5,10 +5,6 @@ $('.save-btn').on('click', saveBtn);
 $('.bottom-box').on('mouseover', masterFunction);
 onLoad();
 
-
-
-
-
 function btnState () {
   $('.save-btn').prop('disabled', checkInputs);
 }
@@ -33,15 +29,11 @@ function checkInputs () {
 function deleteBtn () {
   $('.delete-button').on('click', function() {
     $(this).parent().hide(200);
-    // console.log($(this).parent().data.id);
     console.log(this.parentNode.dataset.id);
     var id = this.parentNode.dataset.id;
+    console.log(id);
     localStorage.removeItem(id);
-  })
-  // if (event.target.className === "delete-button") {
-  //       var cardHTML = $(event.target).closest('.card-container').remove();
-  //       var cardHTMLId = cardHTML[0].id;
-  //       localStorage.removeItem(cardHTMLId);
+  });
 }
 
 function getData() {
