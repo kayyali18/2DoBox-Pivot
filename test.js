@@ -44,6 +44,15 @@ function deleteBtn () {
   });
 }
 
+function entryFixData (id, obj, text, location) {
+  console.log(location);
+  if (location == 'title') {
+    obj.title = text;
+  } else obj.body = text;
+  var stringify = JSON.stringify(obj);
+  localStorage.setItem(id, stringify);
+}
+
 function fixQuality (id) {
   arr = ['swill', 'plausible', 'genius'];
   if (id) {
@@ -79,9 +88,11 @@ function masterFunction() {
 function newCard (key, id) {
     var html =
       `<div data-id="${id}" class="card-container">
-        <h2 class="title-of-card">${key.title}</h2>
+        <h2 class="title-of-card" contenteditable="true" onkeydown="updateText(event, 'title')" onfocusout="updateText(event, 'title')"
+        >${key.title}</h2>
         <button class="delete-button"></button>
-        <p class="body-of-card">${key.body}</p>
+        <p class="body-of-card" contenteditable="true" onkeydown="updateText(event, 'body')" onfocusout="updateText(event, 'body')"
+        >${key.body}</p>
         <button class="upvote"></button>
         <button class="downvote"></button>
         <p class="quality">quality: <span class="qualityVariable">${key.display}</span></p>
@@ -119,6 +130,17 @@ function searchExecute() {
       $(this).slideUp();
     }
   });
+}
+
+function updateText (e, location) {
+  if (event.keyCode == 10 || event.keyCode == 13) {
+    event.preventDefault();
+    document.activeElement.blur();
+  }
+  var id = event.target.parentNode.dataset.id;
+  var obj = JSON.parse(localStorage.getItem(id));
+  var newText = $(`.${location}-of-card`).html();
+  entryFixData(id, obj, newText, location);
 }
 
 function voteUp () {
