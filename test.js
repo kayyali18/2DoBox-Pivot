@@ -147,7 +147,7 @@ function voteUp () {
   $('.upvote').on('click', function (e) {
     var objID = this.parentNode.dataset.id
     var obj = JSON.parse(localStorage.getItem(objID));
-    if (obj.quality <= 1){
+    if (obj.quality <= 3){
       changeQuality (objID, obj, 1)
       $(this).siblings('p').children('span').html(fixQuality(objID));
     }
