@@ -15,8 +15,8 @@ function cardObject() {
     return {
         title: $('#title-input').val(),
         body: $('#body-input').val(),
-        quality: 0,
-        display: 'swill'
+        quality: 2,
+        display: 'Normal'
     };
 }
 
@@ -54,7 +54,7 @@ function entryFixData (id, obj, text, location) {
 }
 
 function fixQuality (id) {
-  arr = ['swill', 'plausible', 'genius'];
+  arr = ['None', 'Low', 'Normal', 'High', 'Critical'];
   if (id) {
     var obj = JSON.parse(localStorage.getItem(id));
     obj.display = arr[obj.quality];
