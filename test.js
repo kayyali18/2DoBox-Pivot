@@ -3,6 +3,8 @@ $('#title-input').on('keyup', btnState);
 $('#body-input').on('keyup', btnState);
 $('.save-btn').on('click', saveBtn);
 $('.bottom-box').on('mouseover', masterFunction);
+$('#search-input').on('keyup', searchExecute);
+
 onLoad();
 
 function btnState () {
@@ -106,6 +108,17 @@ function saveBtn (event) {
   fixQuality(id);
   voteUp();
   voteDown();
+}
+
+function searchExecute() {
+  console.log('working');
+  $('.card-container').each(function() {
+    if($(this).text().toLowerCase().indexOf($('#search-input').val().toLowerCase()) !== -1) {
+      $(this).slideDown();
+    } else {
+      $(this).slideUp();
+    }
+  });
 }
 
 function voteUp () {
