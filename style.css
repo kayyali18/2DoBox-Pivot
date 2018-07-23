@@ -121,6 +121,19 @@ p {
 button {
     background-color: transparent;
     border: none;
+    cursor: pointer;
+}
+
+.complete {
+  cursor: pointer;
+  float: right;
+  font-size: 18px;
+  color: rgba(235, 63, 52, 0.69);
+  margin-right: 10px;
+}
+
+.completed {
+  color: rgba(48, 224, 8, 0.57);
 }
 
 .upvote {

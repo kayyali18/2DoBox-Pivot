@@ -11,12 +11,13 @@ function btnState () {
   $('.save-btn').prop('disabled', checkInputs);
 }
 
-function cardObject() {
+function cardObject () {
     return {
         title: $('#title-input').val(),
         body: $('#body-input').val(),
         quality: 2,
-        display: 'Normal'
+        display: 'Normal',
+        completed: false
     };
 }
 
@@ -64,7 +65,7 @@ function fixQuality (id) {
   }
 }
 
-function getData() {
+function getData () {
   $.each(localStorage, function(key) {
     var object = parseInt(key);
     var parsedObject = JSON.parse(localStorage.getItem(object))
@@ -81,7 +82,7 @@ function localStoreCard (id) {
   localStorage.setItem(id, cardString);
 }
 
-function masterFunction() {
+function masterFunction () {
   deleteBtn();
 }
 
@@ -95,6 +96,7 @@ function newCard (key, id) {
         >${key.body}</p>
         <button class="upvote"></button>
         <button class="downvote"></button>
+        <i class="fas fa-check-circle complete"></i>
         <p class="quality">quality: <span class="qualityVariable">${key.display}</span></p>
         <hr>
       </div>`
@@ -102,11 +104,12 @@ function newCard (key, id) {
 
 };
 
-function onLoad() {
+function onLoad () {
   btnState();
   getData();
   voteUp();
   voteDown();
+  complete();
 }
 
 function saveBtn (event) {
@@ -121,7 +124,7 @@ function saveBtn (event) {
   voteDown();
 }
 
-function searchExecute() {
+function searchExecute () {
   console.log('working');
   $('.card-container').each(function() {
     if($(this).text().toLowerCase().indexOf($('#search-input').val().toLowerCase()) !== -1) {
@@ -163,4 +166,17 @@ function voteDown () {
       $(this).siblings('p').children('span').html(fixQuality(objID));
     }
   })
+}
+
+function complete () {
+  $('.complete').on('click', function() {
+    $(this).toggleClass('completed');
+    var id = this.parentNode.dataset.id;
+    var obj = JSON.parse(localStorage.getItem(id))
+    if (obj.completed == false) obj.completed = true;
+    else obj.completed = false;
+    console.log(obj.completed)
+    var stringify = JSON.stringify(obj);
+    localStorage.setItem(id, stringify)
+  });
 }
