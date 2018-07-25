@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>ideaBox</title>
+    <title>2DoBox</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
@@ -15,14 +15,36 @@
     <section class="container box">
         <article class="top-box">
             <form>
-                <h1 class="idea">idea</h1>
+                <h1 class="idea">2Do</h1>
                 <h1 class="box">Box</h1>
                 <input id="title-input" type="text" placeholder="Title"><br />
                 <input id="body-input" type="text" placeholder="Body"><br />
                 <button class="save-btn">save</button><br />
             </form>
         </article>
-
+        <h4>priority filter</h4>
+        <div class="priority-filter">
+            <div class="filter-grid-wrap">
+                <i class="fas fa-dot-circle pri-none"></i>
+                <p class="pri-text">none</p>
+            </div>
+            <div class="filter-grid-wrap">
+                <i class="fas fa-dot-circle pri-low"></i>
+                <p class="pri-text">low</p>
+            </div>
+            <div class="filter-grid-wrap">
+                <i class="fas fa-dot-circle pri-normal"></i>
+                <p class="pri-text">normal</p>
+            </div>
+            <div class="filter-grid-wrap">
+                <i class="fas fa-dot-circle pri-high"></i>
+                <p class="pri-text">high</p>
+            </div>
+            <div class="filter-grid-wrap">
+                <i class="fas fa-dot-circle pri-critical"></i>
+                <p class="pri-text">critical</p>
+            </div>
+        </div>
         <input id="search-input" type="text" placeholder="Search">
 
 
