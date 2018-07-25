@@ -82,7 +82,6 @@ function fixQuality (id) {
 
 function getData () {
   var counter = 0;
-  var array = [];
   $.each(localStorage, function(key) {
     var object = parseInt(key);
     var parsedObject = JSON.parse(localStorage.getItem(object));
@@ -90,8 +89,7 @@ function getData () {
       return false;
     }
     newCard(parsedObject, object);
-    array.unshift(object);
-    idArray (array);
+    idArray (object);
     fixQuality(object);
     checkCompleted(object);
   });
@@ -142,7 +140,8 @@ function saveBtn (event) {
   localStoreCard(id);
   fixQuality(id);
   updateCount(1);
-
+  idArray(id);
+  displayTopTen();
 }
 
 function searchExecute () {
@@ -241,8 +240,13 @@ function displayTopTen () {
   }
 }
 
-function idArray (array) {
-  localStorage.setItem('idArray', JSON.stringify(array));
+function idArray (object) {
+  console.log(idArray);
+  console.log('hihidshfiosdhfisdhflsdhf');
+  var idArray = JSON.parse(localStorage.getItem("idArray")) || [];
+  idArray.unshift(object);
+  var stringify = JSON.stringify(idArray)
+  localStorage.setItem('idArray', stringify);
 }
 
 function deleteIdArray (id) {
@@ -250,7 +254,7 @@ function deleteIdArray (id) {
   if (array.length > 1) {
     for (x in array) {
       if (array[x] == id && x !== 0) {
-        array.slice(x);
+        array.splice(x, 1);
       }
     }
   } else array.shift();
