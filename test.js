@@ -2,7 +2,7 @@ var $this = $(this);
 $('#title-input').on('keyup', btnState);
 $('#body-input').on('keyup', btnState);
 $('.save-btn').on('click', saveBtn);
-$('.bottom-box').on('mouseover', masterFunction);
+$('.save-btn').on('click', masterFunction);
 $('#search-input').on('keyup', searchExecute);
 
 onLoad();
@@ -68,12 +68,13 @@ function fixQuality (id) {
 function getData () {
   $.each(localStorage, function(key) {
     var object = parseInt(key);
-    var parsedObject = JSON.parse(localStorage.getItem(object))
+    var parsedObject = JSON.parse(localStorage.getItem(object));
     if (!parsedObject) {
       return false;
     }
     newCard(parsedObject, object);
-    fixQuality(object)
+    fixQuality(object);
+    checkCompleted(object);
   });
 }
 
@@ -84,6 +85,8 @@ function localStoreCard (id) {
 
 function masterFunction () {
   deleteBtn();
+  complete();
+
 }
 
 function newCard (key, id) {
@@ -107,9 +110,9 @@ function newCard (key, id) {
 function onLoad () {
   btnState();
   getData();
+  masterFunction();
   voteUp();
   voteDown();
-  complete();
 }
 
 function saveBtn (event) {
@@ -162,7 +165,7 @@ function voteDown () {
     var objID = this.parentNode.dataset.id
     var obj = JSON.parse(localStorage.getItem(objID));
     if (obj.quality >= 1){
-      changeQuality (objID, obj, -1)
+      changeQuality (objID, obj, -1);
       $(this).siblings('p').children('span').html(fixQuality(objID));
     }
   })
@@ -172,11 +175,30 @@ function complete () {
   $('.complete').on('click', function() {
     $(this).toggleClass('completed');
     var id = this.parentNode.dataset.id;
-    var obj = JSON.parse(localStorage.getItem(id))
+    var obj = JSON.parse(localStorage.getItem(id));
     if (obj.completed == false) obj.completed = true;
     else obj.completed = false;
-    console.log(obj.completed)
     var stringify = JSON.stringify(obj);
-    localStorage.setItem(id, stringify)
+    localStorage.setItem(id, stringify);
   });
 }
+
+function checkCompleted (id) {
+  var obj = JSON.parse(localStorage.getItem(id));
+  if (obj.completed) {
+    console.log(obj);
+    $('.card-container').data('data-id', obj.id).children('.complete').first().addClass('completed');
+  }
+}
+
+
+// function fixQuality (id) {
+//   arr = ['None', 'Low', 'Normal', 'High', 'Critical'];
+//   if (id) {
+//     var obj = JSON.parse(localStorage.getItem(id));
+//     obj.display = arr[obj.quality];
+//     var stringify = JSON.stringify(obj);
+//     localStorage.setItem(id, stringify)
+//     return obj.display;
+//   }
+// }
