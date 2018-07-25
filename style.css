@@ -54,7 +54,7 @@ h1{
     width: 45%;
 }
 
-.save-btn {
+.save-btn, .display-btn {
     background-color: #00a79d;
     border: none;
     color: #fff;
@@ -63,12 +63,16 @@ h1{
     width: 45.5%;
 }
 
-.save-btn:hover {
+.save-btn:hover, .display-btn:hover {
     background-color: #045e55;
 }
 
 .save-btn:disabled {
   background-color: #bfe3df;
+}
+
+.display-btn {
+    margin: 1rem auto;
 }
 
 input {

@@ -52,10 +52,12 @@ function deleteBtn () {
   if ($(event.target).hasClass('delete-button')) {
       $(event.target).parent().hide(200);
       var id = event.target.parentNode.dataset.id;
+      $(event.target).parent().remove();
       localStorage.removeItem(id);
       deleteIdArray(id);
       updateCount(-1);
     };
+    displayTopTen();
 }
 
 function entryFixData (id, obj, text, location) {
@@ -231,6 +233,12 @@ function displayTopTen () {
     counter++;
     console.log(counter)
   }
+  for (x in array) {
+    if (x > 10) {
+      var card = $('.card-container')[counter];
+      card.setAttribute('style', 'display:none')
+    }
+  }
 }
 
 function idArray (array) {
@@ -242,7 +250,7 @@ function deleteIdArray (id) {
   if (array.length > 1) {
     for (x in array) {
       if (array[x] == id && x !== 0) {
-        array.slice(x);
+        array.splice(x, 1);
       }
     }
   } else array.shift();
