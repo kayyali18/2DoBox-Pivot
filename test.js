@@ -132,8 +132,7 @@ function saveBtn (event) {
   localStoreCard(id);
   fixQuality(id);
   updateCount();
-  voteUp();
-  voteDown();
+
 }
 
 function searchExecute () {
