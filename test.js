@@ -250,7 +250,7 @@ function deleteIdArray (id) {
   if (array.length > 1) {
     for (x in array) {
       if (array[x] == id && x !== 0) {
-        array.slice(x);
+        array.splice(x, 1);
       }
     }
   } else array.shift();
