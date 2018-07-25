@@ -131,9 +131,9 @@ function saveBtn (event) {
   newCard(cardObject(), id)
   localStoreCard(id);
   fixQuality(id);
+  updateCount();
   voteUp();
   voteDown();
-  updateCount();
 }
 
 function searchExecute () {
