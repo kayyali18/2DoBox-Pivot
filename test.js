@@ -57,6 +57,7 @@ function deleteBtn () {
       deleteIdArray(id);
       updateCount(-1);
     };
+    displayTopTen();
 }
 
 function entryFixData (id, obj, text, location) {
@@ -232,7 +233,12 @@ function displayTopTen () {
     counter++;
     console.log(counter)
   }
-  for (x)
+  for (x in array) {
+    if (x > 10) {
+      var card = $('.card-container')[counter];
+      card.setAttribute('style', 'display:none')
+    }
+  }
 }
 
 function idArray (array) {
