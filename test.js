@@ -2,8 +2,21 @@ var $this = $(this);
 $('#title-input').on('keyup', btnState);
 $('#body-input').on('keyup', btnState);
 $('.save-btn').on('click', saveBtn);
-$('.save-btn').on('click', masterFunction);
+// $('.save-btn').on('click', masterFunction);
 $('#search-input').on('keyup', searchExecute);
+$('.bottom-box').on('click', masterFunction);
+
+function masterFunction() {
+  if ($(event.target).hasClass('delete-button')) {
+    deleteBtn(event);
+  } else if ($(event.target).hasClass('upvote')) {
+    voteUp(event);
+  } else if ($(event.target).hasClass('downvote')) {
+    voteDown(event);
+  } else if ($(event.target).hasClass('complete')) {
+    complete(event);
+  }
+}
 
 onLoad();
 
@@ -36,13 +49,11 @@ function checkInputs () {
 }
 
 function deleteBtn () {
-  $('.delete-button').on('click', function() {
-    $(this).parent().hide(200);
-    console.log(this.parentNode.dataset.id);
-    var id = this.parentNode.dataset.id;
-    console.log(id);
-    localStorage.removeItem(id);
-  });
+  if ($(event.target).hasClass('delete-button')) {
+      $(event.target).parent().hide(200);
+      var id = event.target.parentNode.dataset.id;
+      localStorage.removeItem(id);
+    };
 }
 
 function entryFixData (id, obj, text, location) {
@@ -83,11 +94,10 @@ function localStoreCard (id) {
   localStorage.setItem(id, cardString);
 }
 
-function masterFunction () {
-  deleteBtn();
-  complete();
+// function masterFunction () {
+//   complete();
 
-}
+// }
 
 function newCard (key, id) {
     var html =
@@ -110,9 +120,8 @@ function newCard (key, id) {
 function onLoad () {
   btnState();
   getData();
-  masterFunction();
-  voteUp();
-  voteDown();
+  // voteUp();
+  // voteDown();
 }
 
 function saveBtn (event) {
@@ -150,38 +159,34 @@ function updateText (e, location) {
 }
 
 function voteUp () {
-  $('.upvote').on('click', function (e) {
-    var objID = this.parentNode.dataset.id
+    var objID = event.target.parentNode.dataset.id
     var obj = JSON.parse(localStorage.getItem(objID));
     if (obj.quality <= 3){
       changeQuality (objID, obj, 1)
-      $(this).siblings('p').children('span').html(fixQuality(objID));
+      $(event.target).siblings('p').children('span').html(fixQuality(objID));
     }
-  })
+  
 }
 
-function voteDown () {
-  $('.downvote').on('click', function (e) {
-    var objID = this.parentNode.dataset.id
+function voteDown (event) {
+    var objID = event.target.parentNode.dataset.id
     var obj = JSON.parse(localStorage.getItem(objID));
     if (obj.quality >= 1){
       changeQuality (objID, obj, -1);
-      $(this).siblings('p').children('span').html(fixQuality(objID));
-    }
-  })
+      $(event.target).siblings('p').children('span').html(fixQuality(objID));
+  }
 }
 
 function complete () {
-  $('.complete').on('click', function() {
-    $(this).toggleClass('completed');
-    var id = this.parentNode.dataset.id;
+    $(event.target).toggleClass('completed');
+    var id = event.target.parentNode.dataset.id;
     var obj = JSON.parse(localStorage.getItem(id));
     if (obj.completed == false) obj.completed = true;
     else obj.completed = false;
     var stringify = JSON.stringify(obj);
     localStorage.setItem(id, stringify);
-  });
-}
+  };
+
 
 function checkCompleted (id) {
   var obj = JSON.parse(localStorage.getItem(id));
