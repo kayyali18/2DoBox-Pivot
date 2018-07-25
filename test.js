@@ -53,6 +53,7 @@ function deleteBtn () {
       $(event.target).parent().hide(200);
       var id = event.target.parentNode.dataset.id;
       localStorage.removeItem(id);
+      deleteIdArray(id);
     };
 }
 
@@ -77,6 +78,8 @@ function fixQuality (id) {
 }
 
 function getData () {
+  var counter = 0;
+  var array = [];
   $.each(localStorage, function(key) {
     var object = parseInt(key);
     var parsedObject = JSON.parse(localStorage.getItem(object));
@@ -84,6 +87,8 @@ function getData () {
       return false;
     }
     newCard(parsedObject, object);
+    array.push(object);
+    idArray (array);
     fixQuality(object);
     checkCompleted(object);
   });
@@ -101,7 +106,7 @@ function localStoreCard (id) {
 
 function newCard (key, id) {
     var html =
-      `<div data-id="${id}" class="card-container">
+      `<div data-id="${id}" class="card-container" style="display:block">
         <h2 class="title-of-card" contenteditable="true" onkeydown="updateText(event, 'title')" onfocusout="updateText(event, 'title')"
         >${key.title}</h2>
         <button class="delete-button"></button>
@@ -115,13 +120,13 @@ function newCard (key, id) {
       </div>`
     $('.bottom-box').prepend(html);
 
+
 };
 
 function onLoad () {
   btnState();
   getData();
-  // voteUp();
-  // voteDown();
+  getCounter();
 }
 
 function saveBtn (event) {
@@ -132,8 +137,8 @@ function saveBtn (event) {
   newCard(cardObject(), id)
   localStoreCard(id);
   fixQuality(id);
-  voteUp();
-  voteDown();
+  updateCount();
+
 }
 
 function searchExecute () {
@@ -165,7 +170,7 @@ function voteUp () {
       changeQuality (objID, obj, 1)
       $(event.target).siblings('p').children('span').html(fixQuality(objID));
     }
-  
+
 }
 
 function voteDown (event) {
@@ -196,14 +201,36 @@ function checkCompleted (id) {
   }
 }
 
+function getCounter () {
+  var counter = JSON.parse(localStorage.getItem('counter'));
+  if (!counter) {
+    console.log(counter)
+    counter = 0;
+    JSON.stringify(counter)
+    localStorage.setItem('counter', counter);
+  }
+}
 
-// function fixQuality (id) {
-//   arr = ['None', 'Low', 'Normal', 'High', 'Critical'];
-//   if (id) {
-//     var obj = JSON.parse(localStorage.getItem(id));
-//     obj.display = arr[obj.quality];
-//     var stringify = JSON.stringify(obj);
-//     localStorage.setItem(id, stringify)
-//     return obj.display;
-//   }
-// }
+function updateCount () {
+  var counter = JSON.parse(localStorage.getItem('counter'));
+  console.log(counter);
+  counter++;
+  counter = JSON.stringify(counter);
+  localStorage.setItem('counter', counter);
+}
+
+function idArray (array) {
+  localStorage.setItem('idArray', JSON.stringify(array));
+}
+
+function deleteIdArray (id) {
+  array = JSON.parse(localStorage.getItem('idArray'));
+  if (array.length > 1) {
+    for (x in array) {
+      if (array[x] == id && x !== 0) {
+        array.slice(x);
+      }
+    }
+  } else array.shift();
+  localStorage.setItem('idArray', JSON.stringify(array));
+}
