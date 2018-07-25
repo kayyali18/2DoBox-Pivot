@@ -5,6 +5,7 @@ $('.save-btn').on('click', saveBtn);
 // $('.save-btn').on('click', masterFunction);
 $('#search-input').on('keyup', searchExecute);
 $('.bottom-box').on('click', masterFunction);
+$('.display-btn').on('click', displayAll);
 
 function masterFunction() {
   if ($(event.target).hasClass('delete-button')) {
@@ -57,11 +58,11 @@ function deleteBtn () {
       deleteIdArray(id);
       updateCount(-1);
     };
+    displayTheDisplayBtn();
     displayTopTen();
 }
 
 function entryFixData (id, obj, text, location) {
-  console.log(location);
   if (location == 'title') {
     obj.title = text;
   } else obj.body = text;
@@ -128,6 +129,7 @@ function onLoad () {
   btnState();
   getData();
   getCounter();
+  displayTheDisplayBtn();
   displayTopTen();
 }
 
@@ -141,11 +143,11 @@ function saveBtn (event) {
   fixQuality(id);
   updateCount(1);
   idArray(id);
+  displayTheDisplayBtn();
   displayTopTen();
 }
 
 function searchExecute () {
-  console.log('working');
   $('.card-container').each(function() {
     if($(this).text().toLowerCase().indexOf($('#search-input').val().toLowerCase()) !== -1) {
       $(this).slideDown();
@@ -199,7 +201,6 @@ function complete () {
 function checkCompleted (id) {
   var obj = JSON.parse(localStorage.getItem(id));
   if (obj.completed) {
-    console.log(obj);
     $('.card-container').data('data-id', obj.id).children('.complete').first().addClass('completed');
   }
 }
@@ -207,7 +208,6 @@ function checkCompleted (id) {
 function getCounter () {
   var counter = JSON.parse(localStorage.getItem('counter'));
   if (!counter) {
-    console.log(counter)
     counter = 0;
     JSON.stringify(counter)
     localStorage.setItem('counter', counter);
@@ -216,7 +216,6 @@ function getCounter () {
 
 function updateCount (num) {
   var counter = JSON.parse(localStorage.getItem('counter'));
-  console.log(counter);
   counter+= num;
   counter = JSON.stringify(counter);
   localStorage.setItem('counter', counter);
@@ -228,9 +227,7 @@ function displayTopTen () {
   while (counter <= 9) {
     var card = $('.card-container')[counter];
     card.setAttribute('style', 'display:block')
-    console.log(card);
     counter++;
-    console.log(counter)
   }
   for (x in array) {
     if (x > 10) {
@@ -242,19 +239,19 @@ function displayTopTen () {
 
 function displayAll () {
   $('.card-container').css('display', 'block');
+  $('.display-btn').hide();
 }
 
 function displayTheDisplayBtn () {
-  if ($('.card-container').attr('style', 'display:none')) {
-    $('.display-btn').show(500);
-  } else {
+  var counter = JSON.parse(localStorage.getItem('counter'));
+  if (counter < 10) {
     $('.display-btn').hide();
+  } else {
+    $('.display-btn').show(500);
   }
 }
 
 function idArray (object) {
-  console.log(idArray);
-  console.log('hihidshfiosdhfisdhflsdhf');
   var idArray = JSON.parse(localStorage.getItem("idArray")) || [];
   idArray.unshift(object);
   var stringify = JSON.stringify(idArray)
