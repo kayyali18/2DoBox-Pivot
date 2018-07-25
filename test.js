@@ -6,6 +6,63 @@ $('.save-btn').on('click', saveBtn);
 $('#search-input').on('keyup', searchExecute);
 $('.bottom-box').on('click', masterFunction);
 $('.display-btn').on('click', displayAll);
+$('.pri-none').on('click', none)
+$('.pri-low').on('click', low)
+$('.pri-normal').on('click', normal)
+$('.pri-high').on('click', high)
+$('.pri-critical').on('click', critical)
+
+
+// function none () {
+//   $('.card-container').each(function(index, el) {
+//     console.log($this)
+//   });
+// }
+
+function none () {
+  $(event.target).toggleClass('red');
+  $('.card-container').each(function() {
+    if($(this).text().toLowerCase().indexOf('none') == -1) {
+      $(this).slideToggle('slow');
+    }
+  });
+}
+
+function low () {
+  $(event.target).toggleClass('red');
+  $('.card-container').each(function() {
+    if($(this).text().toLowerCase().indexOf('low') == -1) {
+      $(this).slideToggle('slow');
+    }
+  });
+}
+
+function normal () {
+  $(event.target).toggleClass('red');
+  $('.card-container').each(function() {
+    if($(this).text().toLowerCase().indexOf('normal') == -1) {
+      $(this).slideToggle('slow');
+    }
+  });
+}
+
+function high () {
+  $(event.target).toggleClass('red');
+  $('.card-container').each(function() {
+    if($(this).text().toLowerCase().indexOf('high') == -1) {
+      $(this).slideToggle('slow');
+    }
+  });
+}
+
+function critical () {
+  $(event.target).toggleClass('red');
+  $('.card-container').each(function() {
+    if($(this).text().toLowerCase().indexOf('critical') == -1) {
+      $(this).slideToggle('slow');
+    }
+  });
+}
 
 function masterFunction() {
   if ($(event.target).hasClass('delete-button')) {
