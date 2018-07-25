@@ -54,6 +54,7 @@ function deleteBtn () {
       var id = event.target.parentNode.dataset.id;
       localStorage.removeItem(id);
       deleteIdArray(id);
+      updateCount(-1);
     };
 }
 
@@ -87,7 +88,7 @@ function getData () {
       return false;
     }
     newCard(parsedObject, object);
-    array.push(object);
+    array.unshift(object);
     idArray (array);
     fixQuality(object);
     checkCompleted(object);
@@ -106,7 +107,7 @@ function localStoreCard (id) {
 
 function newCard (key, id) {
     var html =
-      `<div data-id="${id}" class="card-container" style="display:block">
+      `<div data-id="${id}" class="card-container" style="display:none">
         <h2 class="title-of-card" contenteditable="true" onkeydown="updateText(event, 'title')" onfocusout="updateText(event, 'title')"
         >${key.title}</h2>
         <button class="delete-button"></button>
@@ -127,6 +128,7 @@ function onLoad () {
   btnState();
   getData();
   getCounter();
+  displayTopTen();
 }
 
 function saveBtn (event) {
@@ -137,7 +139,7 @@ function saveBtn (event) {
   newCard(cardObject(), id)
   localStoreCard(id);
   fixQuality(id);
-  updateCount();
+  updateCount(1);
 
 }
 
@@ -211,12 +213,24 @@ function getCounter () {
   }
 }
 
-function updateCount () {
+function updateCount (num) {
   var counter = JSON.parse(localStorage.getItem('counter'));
   console.log(counter);
-  counter++;
+  counter+= num;
   counter = JSON.stringify(counter);
   localStorage.setItem('counter', counter);
+}
+
+function displayTopTen () {
+  var array = JSON.parse(localStorage.getItem('idArray'));
+  var counter = 0;
+  while (counter <= 9) {
+    var card = $('.card-container')[counter];
+    card.setAttribute('style', 'display:block')
+    console.log(card);
+    counter++;
+    console.log(counter)
+  }
 }
 
 function idArray (array) {
