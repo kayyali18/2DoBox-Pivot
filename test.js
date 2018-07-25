@@ -240,6 +240,18 @@ function displayTopTen () {
   }
 }
 
+function displayAll () {
+  $('.card-container').css('display', 'block');
+}
+
+function displayTheDisplayBtn () {
+  if ($('.card-container').attr('style', 'display:none')) {
+    $('.display-btn').show(500);
+  } else {
+    $('.display-btn').hide();
+  }
+}
+
 function idArray (object) {
   console.log(idArray);
   console.log('hihidshfiosdhfisdhflsdhf');
