@@ -51,8 +51,8 @@ function checkInputs () {
 }
 
 function clearInputs () {
-   $('#title-input').html() = '';
-    $('#body-input').html() = '';
+   $('#title-input').val('');
+   $('#body-input').val('');
 }
 
 function complete () {
