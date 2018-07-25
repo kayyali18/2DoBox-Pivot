@@ -120,8 +120,7 @@ function newCard (key, id) {
 function onLoad () {
   btnState();
   getData();
-  // voteUp();
-  // voteDown();
+  getCounter();
 }
 
 function saveBtn (event) {
@@ -134,6 +133,7 @@ function saveBtn (event) {
   fixQuality(id);
   voteUp();
   voteDown();
+  updateCount();
 }
 
 function searchExecute () {
@@ -165,7 +165,7 @@ function voteUp () {
       changeQuality (objID, obj, 1)
       $(event.target).siblings('p').children('span').html(fixQuality(objID));
     }
-  
+
 }
 
 function voteDown (event) {
@@ -196,14 +196,20 @@ function checkCompleted (id) {
   }
 }
 
+function getCounter () {
+  var counter = JSON.parse(localStorage.getItem('counter'));
+  if (!counter) {
+    console.log(counter)
+    counter = 0;
+    JSON.stringify(counter)
+    localStorage.setItem('counter', counter);
+  }
+}
 
-// function fixQuality (id) {
-//   arr = ['None', 'Low', 'Normal', 'High', 'Critical'];
-//   if (id) {
-//     var obj = JSON.parse(localStorage.getItem(id));
-//     obj.display = arr[obj.quality];
-//     var stringify = JSON.stringify(obj);
-//     localStorage.setItem(id, stringify)
-//     return obj.display;
-//   }
-// }
+function updateCount () {
+  var counter = JSON.parse(localStorage.getItem('counter'));
+  console.log(counter)
+  counter++;
+  counter = JSON.stringify(counter)
+  localStorage.setItem('counter', counter);
+}
