@@ -17,39 +17,39 @@
             <form>
                 <h1 class="idea">2Do</h1>
                 <h1 class="box">Box</h1>
-                <input id="title-input" type="text" placeholder="Title"><br />
-                <input id="body-input" type="text" placeholder="Body"><br />
-                <button class="save-btn">save</button><br />
+                <input id="title-input" type="text" placeholder="Title" aria-label="title-text-input"><br />
+                <input id="body-input" type="text" placeholder="Body" aria-label="body-text-input"><br />
+                <button class="save-btn" aria-label="save-button">save</button><br />
             </form>
         </article>
         <h4>priority filter</h4>
         <div class="priority-filter">
-            <div class="filter-grid-wrap pri-none">
+            <div class="filter-grid-wrap pri-none" aria-label="priority-none-filter">
                 <i class="fas fa-dot-circle "></i>
                 <p class="pri-text">none</p>
             </div>
-            <div class="filter-grid-wrap pri-low">
+            <div class="filter-grid-wrap pri-low" aria-label="priority-low-filter">
                 <i class="fas fa-dot-circle"></i>
                 <p class="pri-text">low</p>
             </div>
-            <div class="filter-grid-wrap pri-normal">
+            <div class="filter-grid-wrap pri-normal" aria-label="priority-normal-filter">
                 <i class="fas fa-dot-circle"></i>
                 <p class="pri-text">normal</p>
             </div>
-            <div class="filter-grid-wrap pri-high">
+            <div class="filter-grid-wrap pri-high" aria-label="priority-high-filter">
                 <i class="fas fa-dot-circle"></i>
                 <p class="pri-text">high</p>
             </div>
-            <div class="filter-grid-wrap  pri-critical">
+            <div class="filter-grid-wrap  pri-critical" aria-label="priority-critical-filter">
                 <i class="fas fa-dot-circle"></i>
                 <p class="pri-text">critical</p>
             </div>
         </div>
-        <input id="search-input" type="text" placeholder="Search">
+        <input id="search-input" type="text" placeholder="Search" aria-label="search-filter-text-input">
 
 
         <article class="bottom-box"> </article>
-        <button class="display-btn">display all</button>
+        <button class="display-btn" aria-label="display-all-ideas">display all</button>
     </section>
 
     <script src="./jquery/jquery-3.2.1.js"></script>
