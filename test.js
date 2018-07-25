@@ -117,7 +117,7 @@ function newCard (key, id) {
         <button class="upvote"></button>
         <button class="downvote"></button>
         <i class="fas fa-check-circle complete"></i>
-        <p class="quality">quality: <span class="qualityVariable">${key.display}</span></p>
+        <p class="quality">priority: <span class="qualityVariable">${key.display}</span></p>
         <hr>
       </div>`
     $('.bottom-box').prepend(html);
