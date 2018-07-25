@@ -52,6 +52,7 @@ function deleteBtn () {
   if ($(event.target).hasClass('delete-button')) {
       $(event.target).parent().hide(200);
       var id = event.target.parentNode.dataset.id;
+      $(event.target).parent().remove();
       localStorage.removeItem(id);
       deleteIdArray(id);
       updateCount(-1);
@@ -231,6 +232,7 @@ function displayTopTen () {
     counter++;
     console.log(counter)
   }
+  for (x)
 }
 
 function idArray (array) {
