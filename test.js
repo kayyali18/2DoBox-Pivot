@@ -53,6 +53,7 @@ function checkInputs () {
 function clearInputs () {
    $('#title-input').val('');
    $('#body-input').val('');
+   btnState();
 }
 
 function complete () {
