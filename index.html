@@ -3,7 +3,9 @@
 <head>
     <title>2DoBox</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Barlow:500,500i,600,600i,700,700i,800,800i,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
     integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -13,16 +15,30 @@
 
 <body>
     <section class="container box">
-        <article class="top-box">
+        <article class="top-box" id="top-box">
+          <div id="title">
+            <h1 class="idea" id="what">What</h1>
+            <h1 class="idea" id="to">2</h1>
+            <h1 class="box" id="do">Do</h1>
+          </div>
+          <div id="motivation">
+            <div id="write-it">
+              <p>Write it</p>
+            </div>
+            <div id="do-it">
+              <p>Do it</p>
+            </div>
+            <div id="feel-good">
+              <p>Feel good</p>
+            </div>
+          </div>
             <form>
-                <h1 class="idea">2Do</h1>
-                <h1 class="box">Box</h1>
-                <input id="title-input" type="text" placeholder="Title"><br />
-                <input id="body-input" type="text" placeholder="Body"><br />
-                <button class="save-btn">save</button><br />
+                <input id="title-input" class="input-2" type="text" placeholder="Title"><br />
+                <input id="body-input" class="input-2" type="text" placeholder="Body"><br />
+                <button class="save-btn" id="save">save</button><br />
             </form>
         </article>
-        <h4>priority filter</h4>
+        <h4 id="h4">priority filter</h4>
         <div class="priority-filter">
             <div class="filter-grid-wrap pri-none">
                 <i class="fas fa-dot-circle "></i>
@@ -48,7 +64,7 @@
         <input id="search-input" type="text" placeholder="Search">
 
 
-        <article class="bottom-box"> </article>
+        <article class="bottom-box" id="btm-box"> </article>
         <button class="display-btn">display all</button>
     </section>
 
