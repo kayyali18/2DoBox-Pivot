@@ -2,15 +2,14 @@ var $this = $(this);
 $('#title-input').on('keyup', btnState);
 $('#body-input').on('keyup', btnState);
 $('.save-btn').on('click', saveBtn);
-// $('.save-btn').on('click', masterFunction);
 $('#search-input').on('keyup', searchExecute);
 $('.bottom-box').on('click', masterFunction);
 $('.display-btn').on('click', displayAll);
-$('.pri-none').on('click', none)
-$('.pri-low').on('click', low)
-$('.pri-normal').on('click', normal)
-$('.pri-high').on('click', high)
-$('.pri-critical').on('click', critical)
+$('.pri-none').on('click', none);
+$('.pri-low').on('click', low);
+$('.pri-normal').on('click', normal);
+$('.pri-high').on('click', high);
+$('.pri-critical').on('click', critical);
 
 
 onLoad();
@@ -120,13 +119,13 @@ function displayTopTen () {
   var counter = 0;
   while (counter <= 9) {
     var card = $('.card-container')[counter];
-    card.setAttribute('style', 'display:block')
+    card.setAttribute('style', 'display:block');
     counter++;
   }
   for (x in array) {
     if (x > 10) {
       var card = $('.card-container')[counter];
-      card.setAttribute('style', 'display:none')
+      card.setAttribute('style', 'display:none');
     }
   }
 }
@@ -145,7 +144,7 @@ function fixQuality (id) {
     var obj = JSON.parse(localStorage.getItem(id));
     obj.display = arr[obj.quality];
     var stringify = JSON.stringify(obj);
-    localStorage.setItem(id, stringify)
+    localStorage.setItem(id, stringify);
     return obj.display;
   }
 }
@@ -154,7 +153,7 @@ function getCounter () {
   var counter = JSON.parse(localStorage.getItem('counter'));
   if (!counter) {
     counter = 0;
-    JSON.stringify(counter)
+    JSON.stringify(counter);
     localStorage.setItem('counter', counter);
   }
 }
@@ -186,7 +185,7 @@ function high () {
 function idArray (object) {
   var idArray = JSON.parse(localStorage.getItem("idArray")) || [];
   idArray.unshift(object);
-  var stringify = JSON.stringify(idArray)
+  var stringify = JSON.stringify(idArray);
   localStorage.setItem('idArray', stringify);
 }
 
@@ -228,15 +227,15 @@ function none () {
 function newCard (key, id) {
   var html =
     `<div data-id="${id}" class="card-container" style="display:none">
-      <h2 class="title-of-card" contenteditable="true" onkeydown="updateText(event, 'title')" onfocusout="updateText(event, 'title')"
+      <h2 class="title-of-card" aria-label="to-do-item-title" contenteditable="true" onkeydown="updateText(event, 'title')" onfocusout="updateText(event, 'title')"
       >${key.title}</h2>
       <button class="delete-button"></button>
-      <p class="body-of-card" contenteditable="true" onkeydown="updateText(event, 'body')" onfocusout="updateText(event, 'body')"
+      <p class="body-of-card" contenteditable="true" aria-label="to-do-item-body" onkeydown="updateText(event, 'body')" onfocusout="updateText(event, 'body')"
       >${key.body}</p>
-      <button class="upvote"></button>
-      <button class="downvote"></button>
-      <i class="fas fa-check-circle complete"></i>
-      <p class="quality">quality: <span class="qualityVariable">${key.display}</span></p>
+      <button class="upvote" aria-label="increase-priority-button"></button>
+      <button class="downvote" aria-label="decrease-priorty-button"></button>
+      <i class="fas fa-check-circle complete" aria-label="toggle-completed-button"></i>
+      <p class="quality">quality: <span class="qualityVariable" aria-class="priority-label">${key.display}</span></p>
       <hr>
     </div>`
   $('.bottom-box').prepend(html);
@@ -303,7 +302,7 @@ function updateText (e, location) {
 }
 
 function voteUp () {
-  var objID = event.target.parentNode.dataset.id
+  var objID = event.target.parentNode.dataset.id;
   var obj = JSON.parse(localStorage.getItem(objID));
   if (obj.quality <= 3){
     changeQuality (objID, obj, 1)
@@ -312,7 +311,7 @@ function voteUp () {
 }
 
 function voteDown (event) {
-  var objID = event.target.parentNode.dataset.id
+  var objID = event.target.parentNode.dataset.id;
   var obj = JSON.parse(localStorage.getItem(objID));
   if (obj.quality >= 1){
     changeQuality (objID, obj, -1);
